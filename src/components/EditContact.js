@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import * as duck from "../reducer/update";
 
-  const UpdateContact = ({ contacts, updateContact }) => {
+  const UpdateContact = ({ contacts, updateContacts }) => {
     const { id } = useParams();
     const history = useHistory();
     const currentContact = contacts.find(
@@ -58,8 +60,8 @@ import { toast } from "react-toastify";
         phone,
     };
 
-    updateContact(data);
-    history.push("/");
+    updateContacts(data);
+    // history.push("/");
     toast.success("Contact updated successfully!");
   }
 
@@ -112,13 +114,19 @@ return (
 };
 
 const mapStateToProps = (state) => ({
-  contacts: state,
+  contact: state.updateReducer,
 });
-const mapDispatchToProps = (dispatch) => ({
-  updateContact: (data) => {
-    dispatch({ type: "UPDATE_CONTACT", payload: data });
-  },
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   updateContact: (data) => {
+//     dispatch({ type: "UPDATE_CONTACT", payload: data });
+//   },
+// });
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(duck, dispatch)
+  }
+}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateContact);

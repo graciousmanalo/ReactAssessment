@@ -1,16 +1,14 @@
 import React from "react";
 import { Route, Switch } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
-import AddContact  from './components/AddContact';
 import ViewContact from './components/ViewContact';
-import EditContact from './components/EditContact';
+import UpdateContact from './components/UpdateContact';
 import ContactList from './components/ContactList';
 import PageNotFound from './components/PageNotFound';
 import firebase from "firebase";
 
 
 const App = () => {
-
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
@@ -34,15 +32,8 @@ const App = () => {
         <Route exact path="/">
            <ContactList />
         </Route>
-        <Route path="/add">
-           <AddContact />
-        </Route>
-        <Route path="/view/:contact.id">
-           <ViewContact />
-        </Route>
-        <Route path="/update/:contact.id">
-           <EditContact />
-        </Route>
+        <Route exact path="/view/:id?" component={ViewContact} />
+        <Route exact path="/update/:id?" component={EditContact} />
         <Route path="*">
           <PageNotFound />
         </Route>

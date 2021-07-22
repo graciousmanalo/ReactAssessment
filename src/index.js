@@ -7,11 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import { createStore } from "redux";
 import { Provider } from "react-redux";
-import { contactReducer } from "./reducer/index";
 
-const store = createStore(contactReducer);
+import store from './store';
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
